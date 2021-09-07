@@ -4,33 +4,27 @@
  * @return {number}
  */
 var search = function (nums, target) {
-  if (nums.length === 1) {
-    if (nums[0] === target) {
-      return 0;
-    } else {
-      return -1;
-    }
-  } else if (nums.length === 0) {
-    return -1;
-  }
+  let startIndex = 0;
+  let endIndex = nums.length - 1;
 
-  const middleIndex = Math.ceil(nums.length / 2);
-  if (nums[middleIndex] === target) {
-    return middleIndex;
-  } else if (nums[middleIndex] > target) {
-    const leftArray = nums.slice(0, middleIndex);
-    return search(leftArray, target);
-  } else {
-    const rightArray = nums.slice(middleIndex + 1);
-    return search(rightArray, target);
+  while (startIndex <= endIndex) {
+    let pivot = Math.ceil((endIndex - startIndex) / 2) + startIndex;
+    if (nums[pivot] === target) {
+      return pivot;
+    } else if (nums[pivot] < target) {
+      startIndex = pivot + 1;
+    } else if (nums[pivot] > target) {
+      endIndex = pivot - 1;
+    }
   }
+  return -1;
 };
 
-let input1 = [-1, 0, 3, 5, 9, 12];
-let target1 = 9;
+// let input1 = [-1, 0, 3, 5, 9, 12];
+// let target1 = 9;
 
-let input2 = [-1, 0, 3, 5, 9, 12];
-let target2 = 2;
+// let input2 = [-1, 0, 3, 5, 9, 12];
+// let target2 = 2;
 
-console.log(search(input1, target1));
-console.log(search(input2, target2));
+// console.log(search(input1, target1));
+// console.log(search(input2, target2));
